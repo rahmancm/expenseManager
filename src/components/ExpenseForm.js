@@ -9,10 +9,11 @@ export const ExpenseForm = () => {
     e.prevent.default();
 
     const newTransaction = {
-      id: Math.floor(Math.random() * 100000),
+      id: new Date().getTime().toString(),
       text: text,
-      amount: +amount,
+      amount: amount,
     };
+    console.log(newTransaction);
     addTransaction(newTransaction);
   };
   return (
@@ -40,7 +41,9 @@ export const ExpenseForm = () => {
             placeholder="Enter amount..."
           />
         </div>
-        <button className="btn">Add transaction</button>
+        <button type="submit" className="btn">
+          Add transaction
+        </button>
       </form>
     </>
   );
