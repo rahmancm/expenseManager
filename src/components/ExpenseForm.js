@@ -6,16 +6,22 @@ export const ExpenseForm = () => {
   const { addTransaction } = useContext(GlobalContext);
 
   const onSubmit = (e) => {
-    e.prevent.default();
+    e.preventDefault();
+    if (text && amount) {
+      const newTransaction = {
+        id: new Date().getTime().toString(),
+        text: text,
+        amount: +amount,
+      };
 
-    const newTransaction = {
-      id: new Date().getTime().toString(),
-      text: text,
-      amount: amount,
-    };
-    console.log(newTransaction);
-    addTransaction(newTransaction);
+      addTransaction(newTransaction);
+      setText("");
+      setAmount(0);
+    } else {
+      alert("Please provide both Text and Amount");
+    }
   };
+
   return (
     <>
       <h3>Add new transaction</h3>

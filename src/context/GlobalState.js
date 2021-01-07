@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import AppReducer from "./AppReducer";
 
 const initialState = {
@@ -7,7 +7,13 @@ const initialState = {
 export const GlobalContext = createContext(initialState);
 
 export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [state, dispatch] = useReducer(AppReducer, initialState, () => {
+    const localDate = localStorage.getItem("list");
+    return localDate ? JSON.parse(localDate) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(state));
+  }, [state]);
 
   //Action
   function deleteTransaction(id) {

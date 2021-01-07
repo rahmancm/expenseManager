@@ -1,4 +1,4 @@
-const reducer=(state, action) => {
+const Appreducer = (state, action) => {
   switch (action.type) {
     case "DELETE_TRANSACTION":
       return {
@@ -15,4 +15,4 @@ const reducer=(state, action) => {
       return state;
   }
 };
- export default reducer
+export default Appreducer;
